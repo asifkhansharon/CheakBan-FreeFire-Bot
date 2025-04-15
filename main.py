@@ -51,7 +51,7 @@ async def check_ban_command(ctx):
     # Vérification si l'ID est un nombre
     if not user_id.isdigit():
         await ctx.send(
-            f"{ctx.author.mention} ❌ **UID invalide !**\n➡️ Veuillez fournir un UID valide sous la forme : `!ID 123456789`"
+            f"{ctx.author.mention} ❌ **UID invalide !**\n➡️ PLEASE PROVIDE A VALID UID : `!ID 123456789`"
         )
         return
 
@@ -65,7 +65,7 @@ async def check_ban_command(ctx):
 
     if ban_status is None:
         await ctx.send(
-            f"{ctx.author.mention} ❌ **INFORMATION NOT AVAILABLE.**\nPLEASE TRY AGAIN LETTER."
+            f"{ctx.author.mention} ❌ **INFORMATION NOT AVAILABLE.**\nPLEASE TRY AGAIN LATER."
         )
         return
 
