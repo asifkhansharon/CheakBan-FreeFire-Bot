@@ -65,7 +65,7 @@ async def check_ban_command(ctx):
 
     if ban_status is None:
         await ctx.send(
-            f"{ctx.author.mention} ❌ **INFORMATION NOT AVAILABLE.**\nVeuillez réessayer plus tard."
+            f"{ctx.author.mention} ❌ **INFORMATION NOT AVAILABLE.**\nPLEASE TRY AGAIN LETTER."
         )
         return
 
