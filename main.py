@@ -59,13 +59,13 @@ async def check_ban_command(ctx):
         ban_status = await check_ban(user_id)
     except Exception as e:
         await ctx.send(
-            f"{ctx.author.mention} ⚠️ **Erreur lors de la vérification :**\n```{str(e)}```"
+            f"{ctx.author.mention} ⚠️ **ERROR WHILE CHEAKING:**\n```{str(e)}```"
         )
         return
 
     if ban_status is None:
         await ctx.send(
-            f"{ctx.author.mention} ❌ **Impossible d'obtenir les informations.**\nVeuillez réessayer plus tard."
+            f"{ctx.author.mention} ❌ **INFORMATION NOT AVAILABLE.**\nVeuillez réessayer plus tard."
         )
         return
 
