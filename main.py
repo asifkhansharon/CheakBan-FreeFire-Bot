@@ -9,34 +9,35 @@ from utils import check_ban
 # Initialisation de Flask
 app = Flask(__name__)
 
-# Load environment variables first
-load_dotenv('.env', override=True)
 
-# THEN access the environment variables
+load_dotenv()
 APPLICATION_ID = os.getenv("APPLICATION_ID")
 TOKEN = os.getenv("TOKEN")
-print("TOKEN loaded:", bool(TOKEN))  # Should print True
+
 
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-nomBot = "None"
+
+
 DEFAULT_LANG = "en"
 user_languages = {}
+ 
+nomBot = "None"
 
-# Route Flask pour afficher l'état du bot
 @app.route('/')
 def home():
     global nomBot
-    if nomBot == "None":
-        return "⏳ Bot is starting up, please wait..."
-    return f"✅ Bot {nomBot} is working!"
+    return f"Bot {nomBot} is working"
+
 
 def run_flask():
     app.run(host='0.0.0.0', port=10000)
 
+
 threading.Thread(target=run_flask).start()
+
 
 @bot.event
 async def on_ready():
@@ -45,21 +46,21 @@ async def on_ready():
     print(f"Le bot est connecté en tant que {bot.user}")
 
 @bot.command(name="lang")
-async def change_language(ctx, lang_code: str):
+async def change_language(ctx,lang_code : str):
     lang_code = lang_code.lower()
-    if lang_code not in ["en", "fr"]:
+    if lang_code not in ["en","fr"]:
         await ctx.send("❌ Invalid language. Available: `en`, `fr`")
-        return
-
-    user_languages[ctx.author.id] = lang_code
-    message = "✅ Language set to English." if lang_code == 'en' else "✅ Langue définie sur le français."
+        return 
+    
+    user_languages[ctx.author.id]=lang_code
+    message="✅ Language set to English." if lang_code == 'en' else "✅ Langue définie sur le français."
     await ctx.send(f"{ctx.author.mention} {message}")
-
-@bot.command(name="ID")
+    
+@bot.command(name="ID")  
 async def check_ban_command(ctx):
     content = ctx.message.content
     user_id = content[3:].strip()
-    lang = user_languages.get(ctx.author.id, DEFAULT_LANG)
+    lang = user_languages.get(ctx.author.id, "en")  
 
     print(f"Commande fait par {ctx.author} (lang={lang})")
 
@@ -90,12 +91,14 @@ async def check_ban_command(ctx):
     id_str = f"`{user_id}`"
 
     if isinstance(period, int):
-        period_str = f"`MORE THAN {period} MONTH{'S' if period > 1 else ''}`" if lang == "en" else f"`PLUS DE {period} MOIS`"
+        period_str = f"`more than {period} months`" if lang == "en" else f"`plus de {period} mois`"
     else:
-        period_str = "`UNAVAILABLE`" if lang == "en" else "`INDISPONIBLE`"
+        period_str = "unavailable" if lang == "en" else "indisponible"
 
-    embed = discord.Embed(color=0xFF0000 if is_banned else 0x00FF00,
-                          timestamp=ctx.message.created_at)
+    embed = discord.Embed(
+        color=0xFF0000 if is_banned else 0x00FF00,
+        timestamp=ctx.message.created_at
+    )
 
     if is_banned:
         embed.title = "**▌ Banned Account 🛑 **" if lang == "en" else "**▌ Compte banni 🛑 **"
@@ -116,10 +119,5 @@ async def check_ban_command(ctx):
     embed.set_thumbnail(url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     embed.set_footer(text="📌 Check ban free fire")
     await ctx.send(f"{ctx.author.mention}", embed=embed)
-
-print("=== DEBUG ===")
-print("TOKEN exists:", bool(TOKEN))
-print("TOKEN type:", type(TOKEN))
-print("=============")
 
 bot.run(TOKEN)
