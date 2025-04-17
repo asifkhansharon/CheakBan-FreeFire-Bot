@@ -31,7 +31,7 @@ def home():
     global nomBot
     if nomBot == "None":
         return "⏳ Bot is starting up, please wait..."
-    return f"✅ Bot {nomBot} is working!"
+    return f" Bot {nomBot} is working!✅ "
 
 def run_flask():
     app.run(host='0.0.0.0', port=10000)
@@ -100,21 +100,21 @@ async def check_ban_command(ctx):
                           timestamp=ctx.message.created_at)
 
     if is_banned:
-        embed.title = "**▌ Banned Account 🛑 **" if lang == "en" else "**▌ Compte banni 🛑 **"
+        embed.title = "**▌ BANNED ACCOUNT 🛑 **" if lang == "en" else "**▌ Compte banni 🛑 **"
         embed.description = (
             f"• {'This account was confirmed for using cheats.' if lang == 'en' else 'Ce compte a été confirmé comme utilisant des hacks.'}\n"
-            f"• {'Suspension duration:' if lang == 'en' else 'Durée de la suspension :'} {period_str}\n"
-            f"• {'Player ID:' if lang == 'en' else 'ID du joueur :'} {id_str}\n"
             f"• {'Nickname:' if lang == 'en' else 'Pseudo :'} `{nickname}`\n"
+            f"• {'Player ID:' if lang == 'en' else 'ID du joueur :'} {id_str}\n"
             f"• {'Region:' if lang == 'en' else 'Région :'} `{region}`"
+            f"• {'Suspension duration:' if lang == 'en' else 'Durée de la suspension :'} {period_str}\n"
         )
         embed.set_image(url="https://i.ibb.co/tDnbYrK/standard-1.gif")
     else:
-        embed.title = "**▌ Clean Account ✅ **" if lang == "en" else "**▌ Compte non banni ✅ **"
+        embed.title = "**▌ CLEAN ACCOUNT ✅ **" if lang == "en" else "**▌ Compte non banni ✅ **"
         embed.description = (
             f"• {'No sufficient evidence of cheat usage on this account.' if lang == 'en' else 'Aucune preuve suffisante pour confirmer l’utilisation de hacks sur ce compte.'}\n"
-            f"• {'Player ID:' if lang == 'en' else 'ID du joueur :'} {id_str}\n"
             f"• {'Nickname:' if lang == 'en' else 'Pseudo :'} `{nickname}`\n"
+            f"• {'Player ID:' if lang == 'en' else 'ID du joueur :'} {id_str}\n"
             f"• {'Region:' if lang == 'en' else 'Région :'} `{region}`"
         )
         embed.set_image(url="https://i.ibb.co/CshJSf8/standard-2.gif")
