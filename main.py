@@ -108,7 +108,7 @@ async def check_ban_command(ctx):
             f"• {'Region:' if lang == 'en' else 'Région :'} `{region}`\n"
             f"• {'Suspension duration:' if lang == 'en' else 'Durée de la suspension :'} {period_str}\n"
         )
-        embed.set_image(url="https://i.ibb.co/tDnbYrK/standard-1.gif")
+        embed.set_image(url="https://i.ibb.co/wFxTy8TZ/banned.gif")
     else:
         embed.title = "**▌ CLEAN ACCOUNT ✅ **" if lang == "en" else "**▌ Compte non banni ✅ **"
         embed.description = (
@@ -117,7 +117,7 @@ async def check_ban_command(ctx):
             f"• {'Player ID:' if lang == 'en' else 'ID du joueur :'} {id_str}\n"
             f"• {'Region:' if lang == 'en' else 'Région :'} `{region}`"
         )
-        embed.set_image(url="https://i.ibb.co/CshJSf8/standard-2.gif")
+        embed.set_image(url="https://i.ibb.co/Kx1RYVKZ/notbanned.gif")
 
     embed.set_thumbnail(url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     embed.set_footer(text="📌 Check ban free fire")
