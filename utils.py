@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 async def check_ban(uid):
-   api_url = f"https://api-check-ban.up.railway.app/check_ban/{uid}"
+    api_url = f"https://api-check-ban.up.railway.app/check_ban/{uid}"
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(api_url) as response:
@@ -20,7 +20,7 @@ async def check_ban(uid):
                         "is_banned": data.get("is_banned", 0),
                         "nickname": data.get("nickname", ""),
                         "period": data.get("period", 0),
-                        "region": data.get('region',0 )
+                        "region": data.get("region", 0)
                     }
                 else:
                     return None
